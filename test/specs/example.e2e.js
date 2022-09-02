@@ -48,6 +48,9 @@ describe('My Login application', () => {
     it('SELECT Destination station', async () => {
         await QTT.clickAndSelecttToStation();
     })
+    it('SELECT Departure & Return Date', async () => {
+        await QTT.clickAndSelectDate();
+    })
     it('should click on adults and kids drop down menu', async () => {
         await QTT.adultsAndkids();
     })

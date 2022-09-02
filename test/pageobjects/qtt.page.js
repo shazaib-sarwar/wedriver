@@ -19,6 +19,20 @@ class QTT {
     return $('//input[@id="regular-qtt-station-picker-destination-input"]')
   }
 
+  // Open Date Input
+  get departureDate(){
+    return $('//*[@id="qtt"]/div/div/div[2]/div[1]/div/div[1]')
+  }
+  get dateInputField(){
+    return $('//*[@id="calendar-september-card"]/div[3]/button[5]/span')
+  }
+  get returnDate(){
+    return $('//*[@id="qtt"]/div/div/div[2]/div[2]/div/div[1]/div[1]')
+  }
+  get returnDateInputField(){
+    return $('//*[@id="calendar-october-card"]/div[3]/button[7]/span')
+  }
+//
   get searchAndByButton() {
     return $('#search-qtt')
   }
@@ -50,6 +64,19 @@ return $ ("//*[@id='submit-passengers-with-railcard']/button")
     await this.toStation.click();
     await this.searchInputToField.setValue("Bicester Village");
     browser.keys("\ue007");
+    await browser.pause(3000)
+
+  }
+
+  // Date Selection
+  async clickAndSelectDate(){
+    // Departure Date
+    await this.departureDate.click()
+    await this.dateInputField.click()
+    // await browser.pause(3000)
+    // Return Date
+    await this.returnDate.click()
+    await this.returnDateInputField.click()
     await browser.pause(3000)
 
   }
