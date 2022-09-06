@@ -53,6 +53,137 @@ get doneButton()
 return $ ("//*[@id='submit-passengers-with-railcard']/button")
 }
 
+// Getting Personal Details
+  get personalDetails(){
+    return $('//*[@id="ace-root"]/div/main/div/ace-account-navbar/div/div/nav/a[3]')
+  }
+  get editProfileButton(){
+    return $('//*[@id="edit-profile"]/button')
+  }
+  get firstName(){
+    return $('//*[@id="first-name"]')
+  }
+  get surName(){
+    return $('//*[@id="last-name"]')
+  }
+
+  get dobDate(){
+    return $('//*[@id="dob-day"]')
+  }
+
+  get dobMonth(){
+    return $('//*[@id="dob-month"]')
+  }
+  get dobYear(){
+    return $('//*[@id="dob-year"]')
+  }
+
+  get addAnotherNumber(){
+    return $('//*[@id="edit-secondary-mob"]/button')
+  }
+
+  get secondaryNumber(){
+    return $('//*[@id="phone-number-secondary"]')
+  }
+
+  get saveChanges(){
+    return $('//*[@id="save-changes-profile"]/button')
+  }
+
+  get addAdress(){
+    return $('//*[@id="add-address"]/button')
+  }
+
+  get addressName(){
+    return $('//*[@id="address-name"]')
+  }
+
+  get city(){
+    return $('//*[@id="address-city"]')
+  }
+   get postCode(){
+    return $('//*[@id="address-postcode"]')
+   }
+   get addressLine1(){
+    return $('//*[@id="address-line-first"]')
+   }
+
+   get saveAddressChanges(){
+    return $('//*[@id="save-changes-address"]/button')
+   }
+
+  // Generate Random Address
+
+  get stringGen() {
+    let text = "";
+
+    let charset = "abcdefghijklmnopqrstuvwxyz";
+
+    for (let i = 0; i < 26; i++)
+      text += charset.charAt(Math.floor(Math.random() * charset.length));
+
+    return text;
+  }
+
+  //////////////
+
+
+  async clickonPersonalDetails(){
+    await this.personalDetails.click()
+    await browser.pause(3000)
+    await this.editProfileButton.click()
+    await browser.pause(3000)
+
+    // Set First & Sur Namename
+    const fname = await this.firstName.getValue();
+    console.log('Printing First Name',fname)
+    await this.firstName.setValue(`${fname}23`)
+    await browser.pause(3000)
+    const surname = await this.surName.getValue();
+    await this.surName.setValue(`${surname}23`)
+    console.log('Printing Sur Name', surname)
+    await browser.pause(3000)
+
+    // Set DOB
+    await this.dobDate.setValue('03')
+    await browser.pause(3000)
+    await this.dobMonth.setValue('10')
+    await browser.pause(3000)
+    await this.dobYear.setValue('1993')
+
+    // Click on Add Another Number
+    await browser.pause(3000)
+    await this.addAnotherNumber.click()
+
+    await this.secondaryNumber.setValue(`${Math.floor(Math.random() * 1000000000)}`)
+    await browser.pause(3000)
+    await this.saveChanges.click()
+
+    // Adding Address
+    await browser.pause(3000)
+    await this.addAdress.click();
+    await browser.pause(3000)
+    const address = this.stringGen.slice(6).toUpperCase()
+    console.log("Address", address)
+    await this.addressName.setValue(address)
+    await browser.pause(3000)
+
+    await this.city.setValue('Manchester')
+    await browser.pause(3000)
+
+    await this.postCode.setValue('5AWCD')
+    await browser.pause(3000)
+
+    await this.addressLine1.setValue('House 133 Street 2')
+
+    await browser.pause(2000)
+    await this.saveAddressChanges.click()
+    await browser.pause(2000)
+
+
+  }
+
+  ////////////////////////////
 
   async clickAndSelectFromStation() {
     await this.fromStation.click();
